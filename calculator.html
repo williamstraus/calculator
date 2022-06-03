@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Calculator</title>
+  </head>
+  <body>
+      <div>
+          <b>Calculator</b>
+        </div>
+        <br>
+        <br>
+        <div>
+            <label for="first_element">First number: </label>
+            <input type="number" id="first_element">
+            <br>
+            <br>
+            <label for="operator_selector">Select operator: </label>
+            <div id="operator_selector">
+                <p hidden id="selected_operator" value = ""></p>
+                <label for="plus">+</label>
+                <input type="radio" id="plus" name="operator" value="+" checked>
+                <label for="minus">-</label>
+                <input type="radio" id="minus" name="operator" value="-">
+                <label for="times">*</label>
+                <input type="radio" id="times" name="operator" value="*">
+                <label for="divide">/</label>
+                <input type="radio" id="divide" name="operator" value="/">
+            </div>
+            <br>
+            <label for="second_element">Second number: </label>
+            <input type="number" id="second_element">
+            <br>
+            <br>
+            <br>
+            <input type="submit" value="Calculate" onclick="calculate()">
+            <button type="button" id="clear_button" value="Clear">Clear</button> 
+            <br>
+            <br>
+            <p>Result:</p>
+            <p id="result"></p>
+          </div>
+    <script>
+         window.onload = () => document.getElementById("clear_button").addEventListener("click", clear)
+         function calculate() {
+            let result;
+            let first = document.getElementById("first_element").value
+            let second = document.getElementById("second_element").value
+            let operator = document.querySelector('input[name = "operator"]:checked').value
+            if (first.length > 0 && second.length > 0 &&!isNaN(first) && !isNaN(second)) {
+                switch (operator) {
+                    case "+":
+                        result = Number(first) + Number(second)
+                        break
+                    case "-":
+                        result = Number(first) - Number(second)
+                        break
+                    case "*":
+                        result = Number(first) * Number(second)
+                        break
+                    case "/":
+                        result = Number(first) / Number(second)
+                        break
+                }
+                document.getElementById("result").innerHTML = result
+                document.getElementById("result").style = "color: black"
+            }
+            else {
+                document.getElementById("result").innerHTML = "incorrect input"
+                document.getElementById("result").style = "color: red"
+            }
+        }
+        function clear() {
+            document.getElementById("first_element").value = ""
+            document.getElementById("second_element").value = ""
+            document.getElementById("result").innerHTML = ""
+        }
+    </script>
+    <style>
+        input[type="radio"] {
+            margin-right: 20px;
+        }
+        input[type="submit"] {
+            margin-right: 20px;
+        }
+    </style>
+  </body>
+</html>
